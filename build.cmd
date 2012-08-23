@@ -1,3 +1,4 @@
+md build
 type src\timeline.license > build\jquery.olegsmith.timeline.min.js
 echo // Build: %DATE% %TIME% >> build\jquery.olegsmith.timeline.min.js
 type src\olegsmith.namespace.js | uglifyjs.cmd -nc >> build\jquery.olegsmith.timeline.min.js
