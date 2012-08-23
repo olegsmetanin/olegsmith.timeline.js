@@ -1,0 +1,149 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title></title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ -->
+</head>
+<body>
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header>
+
+  </header>
+
+  <div style="clear: both;overflow:hidden;">
+      <div style="float: left;width:50%;">
+          <div>Vertical timeline</div>
+          <button id="vnow">Now</button>
+          <button id="vzoomin">Zoomin</button>
+          <button id="vzoomout">Zoomout</button>
+
+          <div class="vtimeline" style="height: 500px; width: 100%;display: block;">Load vertical timeline</div>
+
+      </div>
+      <div style="float:right;;width:50%;">
+          <div>Horizontal timeline</div>
+          <div>
+              <button id="hnow">Now</button>
+              <button id="hzoomin">Zoomin</button>
+              <button id="hzoomout">Zoomout</button>
+          </div>
+          <div class="htimeline" style="float:right;height: 300px; width: 100%;">Load horizontal timeline</div>
+      </div>
+
+  </div>
+
+
+
+
+  <div role="main">
+  </div>
+
+
+  <div role="main">
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <!--
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ -->
+  <script>window.jQuery || document.write('<script src="../libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="../build/jquery.olegsmith.timeline.min.js"></script>
+  <script src="../src/locale/timeline.i18n.en.js"></script>
+
+
+  <script>
+
+      $(document).ready(function () {
+
+          $(".htimeline").timeline({
+              zoom:40,
+              updatefn:function () {
+                  var nowpix=this.ticks2pix(new Date());
+                  return '<div style="left:'+nowpix+'px;top:0px;width:1px;background-color:#FF0000;height:'+this.height+'px;position:absolute"></div>'+
+                          '<div style="left:'+(nowpix+2)+'px;top:40px;position:absolute;color:#FF0000">Now</div>'
+              }
+          });
+
+          $(".vtimeline").timeline({
+              direction:'v',
+              zoom:40,
+              updatefn:function () {
+                  var nowpix=this.ticks2pix(new Date());
+                  return '<div style="top:'+nowpix+'px;left:0px;width:'+this.width+'px;background-color:#FF0000;height:1px;position:absolute"></div>'+
+                          '<div style="top:'+(nowpix+2)+'px;left:40px;position:absolute;color:#FF0000">Now</div>'
+              }
+          });
+
+          $("#vzoomin").click(function () {
+              $(".vtimeline").timeline('zoomin');
+          });
+
+          $("#vzoomout").click(function () {
+              $(".vtimeline").timeline('zoomout');
+          });
+          $("#vnow").click(function () {
+              $(".vtimeline").timeline('now');
+          });
+
+          $("#hzoomin").click(function () {
+              $(".htimeline").timeline('zoomin');
+          });
+
+          $("#hzoomout").click(function () {
+              $(".htimeline").timeline('zoomout');
+          });
+          $("#hnow").click(function () {
+              $(".htimeline").timeline('now');
+          });
+
+
+      });
+  </script>
+
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+      //var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      //(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      //g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      //s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+</body>
+</html>
